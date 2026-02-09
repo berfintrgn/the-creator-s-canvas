@@ -41,7 +41,7 @@ const Contact = () => {
             </a>
 
             <a
-              href="https://instagram.com/dotandeyestudio"
+              href="https://instagram.com/dotandeye"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-4 group"

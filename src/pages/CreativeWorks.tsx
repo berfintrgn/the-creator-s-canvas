@@ -1,19 +1,8 @@
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
-import pinkSeries1 from "@/assets/pink-series-1.jpg";
-import pinkSeries2 from "@/assets/pink-series-2.jpg";
-import pinkSeries3 from "@/assets/pink-series-3.jpg";
-
-const pinkWorks = [
-  { id: 1, src: pinkSeries1, title: "Untitled I", medium: "Mixed media on canvas" },
-  { id: 2, src: pinkSeries2, title: "Untitled II", medium: "Paper collage and acrylic" },
-  { id: 3, src: pinkSeries3, title: "Untitled III", medium: "Acrylic on burlap" },
-];
+import VideoGallery from "@/components/VideoGallery/VideoGallery";
 
 const CreativeWorks = () => {
-  const [selected, setSelected] = useState<number | null>(null);
-
   return (
     <PageTransition>
       <section className="pt-32 pb-24 px-6 md:px-12 max-w-6xl mx-auto">
@@ -43,30 +32,7 @@ const CreativeWorks = () => {
             that invite close inspection.
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {pinkWorks.map((work, i) => (
-              <motion.div
-                key={work.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
-                className="cursor-pointer group"
-                onClick={() => setSelected(work.id)}
-              >
-                <div className="overflow-hidden mb-3">
-                  <img
-                    src={work.src}
-                    alt={work.title}
-                    className="w-full aspect-square object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                  />
-                </div>
-                <h3 className="font-display text-base text-foreground">{work.title}</h3>
-                <p className="text-muted-foreground font-body text-xs">{work.medium}</p>
-              </motion.div>
-            ))}
-          </div>
+          <VideoGallery playlistId="PLwboaLAlWkhhtZYo4xu1fnUskzL1NwUL1" />
         </div>
 
         {/* Virtual Exhibition */}
@@ -83,28 +49,6 @@ const CreativeWorks = () => {
           </div>
         </div>
       </section>
-
-      {/* Lightbox */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 bg-background/95 flex items-center justify-center p-6"
-            onClick={() => setSelected(null)}
-          >
-            <motion.img
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              src={pinkWorks.find((w) => w.id === selected)?.src}
-              alt=""
-              className="max-w-full max-h-[80vh] object-contain"
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </PageTransition>
   );
 };
